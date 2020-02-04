@@ -1,12 +1,7 @@
-# below is the version of the buildspect file 
 version: 0.2
 
-# below are the phases of the buildspec file
 phases:
-  # installing any pacakges you want in the container
   install:
-
-  # below is the set of commands you want to execute
     commands:
       - echo Installing Node 12...
       - curl -sL https://deb.nodesource.com/setup_12.x | bash -
@@ -15,35 +10,18 @@ phases:
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
       - apt install --no-install-recommends yarn
-  # finally runs regardless of any phase success or fail
-  finally:
-    - echo executing finally phase
-  
   pre_build:
-  # commands in the prebuild step
     commands:
-    # installing any dependencies needed for angular app  
       - echo Installing dependencies...
       - yarn
   build:
-  # build phase
     commands:
       - echo Testing...
       - yarn test
       - echo Building...
       - yarn build
-  # postbuild step: if needed use this step to do something with artifacts or ignore this step  
-
-# below is the step used to upload your artifacts to any folder or S3 etc you want
-#artifacts usually has collection of files
 artifacts:
   files:
-  # below gets all the files in the current project
-    - "**/*.html"
-    - "**/*.js"
-    - "**/*.css"
-    - "**/*.ico"
+    - "**/*"
   discard-paths: no
   base-directory: dist
-
-# can also deprovision container in our finalizing step
