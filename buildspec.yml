@@ -27,10 +27,10 @@ phases:
   build:
   # build phase
     commands:
-      - echo Testing...
-      - yarn test
+#       - echo Testing...
+#       - npm test
       - echo Building...
-      - yarn build
+      - npm build
   # postbuild step: if needed use this step to do something with artifacts or ignore this step  
 
 # below is the step used to upload your artifacts to any folder or S3 etc you want
@@ -43,6 +43,6 @@ artifacts:
     - "**/*.css"
     - "**/*.ico"
   discard-paths: no
-  base-directory: dist
+  base-directory: ./build
 
 # can also deprovision container in our finalizing step
